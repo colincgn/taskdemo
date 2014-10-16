@@ -1,0 +1,29 @@
+---
+name: TaskDemo
+description: ''
+keywords: ''
+type: Default
+documentation: ''
+images:
+- name: postgres_latest
+  source: postgres:latest
+  type: Default
+- name: ngxdb_init
+  source: ngxdb:latest
+  category: DB Initial Load
+  type: Default
+  links:
+  - service: postgres_latest
+    alias: db
+- name: ngxdemo
+  source: ngxdemo:1.0
+  category: Application
+  type: Default
+  ports:
+  - host_port: ''
+    container_port: '8080'
+    proto: TCP
+  links:
+  - service: postgres_latest
+    alias: db
+  command: grails run-app
