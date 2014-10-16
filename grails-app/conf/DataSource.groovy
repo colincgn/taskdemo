@@ -3,7 +3,6 @@ dataSource {
     username = "ngxuser"
     password = "ngxuser"
     dialect = "net.kaleidos.hibernate.PostgresqlExtensionsDialect"
-    url = "jdbc:postgresql://192.168.0.14:5432/ngx"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -19,7 +18,9 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:postgresql://192.168.0.14:5432/ngx"
+            String host = System.getenv('DB_PORT_5432_TCP_ADDR')
+            String port = System.getenv('DB_PORT_5432_TCP_PORT')
+            url = "jdbc:postgresql://$host:$port/ngx"
         }
     }
     test {
